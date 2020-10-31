@@ -1,0 +1,40 @@
+<div class="container flex-column d-flex align-items-end" style="height: 100%">
+    <div class="col d-flex align-items-center">
+        <form class="form-home col-8">
+            <div class="input-group input-group-lg mb-3">
+                <input type="text" class="form-control" placeholder="Detalles del producto" [(ngModel)]="search"
+                    [ngModelOptions]="{standalone: true}" aria-label=" Detalles del producto"
+                    aria-describedby="button-addon2">
+
+                <div class="input-group-append">
+                    <button (click)="searchProducts()" class="btn btn-outline-primary"
+                        id="button-addon2">Buscar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col card p-5 mb-5">
+        <h1 class="card-title">Productos mas buscados</h1>
+        <div class="row">
+            <div *ngFor="let product of products" class="col-3">
+                <div class="card">
+                    <a [routerLink]="['/product-detail', product.id]" routerLinkActive="active">
+                        <img [src]="product.image" [alt]="product.name" class="card-img-top">
+                    </a>
+                    <div class="card-body">
+                        <span style="font-size: small">{{ product.brand }}</span>
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <div style="text-decoration: line-through; font-size: small;">
+                            {{ product.normal_price | number }}
+                        </div>
+                        <div style="font-weight: bold;">{{ product.price | number }}</div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <small class="text-muted">Last updated {{ product.update_date | date }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

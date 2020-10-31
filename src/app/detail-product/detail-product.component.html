@@ -1,0 +1,76 @@
+<div class="container">
+
+    <h1 class="my-5" style="font-weight: bold;">Comparador de precios</h1>
+
+    <div class="row mx-0" style="border: 1px solid #ccc">
+        <a [href]="product.url" target="_blank" class="col-4">
+            <img [src]="product.image" [alt]="product.name" class="card-img-top">
+        </a>
+
+        <div class="col">
+            <div class="card-body">
+                <div class="row m-0 text-align-between">
+                    <span>{{ product.brand }}</span>
+                    <span class="ml-auto">Sku: {{ product.sku }}</span>
+                </div>
+
+                <h2 class="card-title my-3">{{ product.name }}</h2>
+
+                <div>
+                    <div style="text-decoration: line-through;">
+                        {{ product.normal_price | number }}
+                    </div>
+                    <div style="font-weight: bold;">
+                        {{ product.price | number }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mx-0 mt-5">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Productos</th>
+                    <th scope="col">Tienda</th>
+                    <th scope="col">Precios</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of products">
+                    <td>
+                        <a [href]="item.url" target="blank" style="text-decoration: none; color:#000">
+                            <div class="media align-items-center">
+                                <img class="mr-3" width="100" [src]="item.image" alt="Generic placeholder image">
+                                <div class="flex-column">
+                                    <p class="my-0">{{ item.name }}</p>
+                                    <div><small class="my-0">sku: {{ item.sku }}</small></div>
+                                    <div><small class="my-0">Marca: {{ item.brand }}</small></div>
+                                    <div><small class="my-0">Modelo: {{ item.model }}</small></div>
+                                </div>
+                            </div>
+                        </a>
+                    </td>
+                    <td class="align-middle">Exito</td>
+                    <td class="align-middle">
+                        <div>
+                            <div style="text-decoration: line-through;">
+                                {{ item.normal_price | number }}
+                            </div>
+                            <div style="font-weight: bold;">
+                                {{ item.price | number }}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row my-5 mx-0 justify-content-center">
+        <button [routerLink]="['/home']" routerLinkActive="active" class="btn btn-primary">
+            Realizar otra busqueda
+        </button>
+    </div>
+</div>
