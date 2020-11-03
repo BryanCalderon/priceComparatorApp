@@ -11,13 +11,17 @@
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active">
+          Home <span class="sr-only">(current)</span>
+        </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Acerca de</a>
       </li>
     </ul>
-    <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Iniciar sesión</a>
-    <a class="btn btn-outline-light" href="#">Registrarse</a>
+    <div *ngIf="userName">
+      <p class="m-0 d-inline" style="color: #FFF;">{{ userName }}</p>
+      <button class="btn btn-link" (click)="logout()">Cerrar sesión</button>
+    </div>
   </div>
 </nav>

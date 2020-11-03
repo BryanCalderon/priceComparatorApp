@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
       .set('username', username)
       .set('password', password);
 
-    return this.http.post('http://127.0.0.1:8000/api-token-auth/',
+    return this.http.post(environment.domain + 'api-token-auth/',
       body.toString(),
       {
         headers: new HttpHeaders()

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 export interface Producto {
   id: number
@@ -21,19 +22,19 @@ export interface Producto {
 @Injectable({
   providedIn: 'root'
 })
-export class HomeService {
+export class ProductService {
 
   constructor(private http: HttpClient) { }
 
   get(): Observable<any> {
-    return this.http.get<any>(`http://localhost:8000/products/`);
+    return this.http.get<any>(environment.domain + `products/`);
   }
 
   getById(id: number): Observable<any> {
-    return this.http.get<any>(`http://localhost:8000/products/${id}/`);
+    return this.http.get<any>(environment.domain + `products/${id}/`);
   }
 
   searchProducts(filter: String): Observable<any> {
-    return this.http.get<any>(`http://localhost:8000/app/search/${filter}/`);
+    return this.http.get<any>(environment.domain + `app/search/${filter}/`);
   }
 }

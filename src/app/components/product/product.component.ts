@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HomeService, Producto } from '../home/service/home.service';
+import { Producto, ProductService } from 'src/app/services/products/products.service';
 
 @Component({
-  selector: 'app-detail-product',
-  templateUrl: './detail-product.component.html',
-  styleUrls: ['./detail-product.component.css']
+  selector: 'app-product',
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.css']
 })
-export class DetailProductComponent implements OnInit {
+export class ProductComponent implements OnInit {
   product: Producto;
   products: Producto[];
 
-  constructor(private route: ActivatedRoute, private homeService: HomeService) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(p => {
@@ -24,13 +24,13 @@ export class DetailProductComponent implements OnInit {
 
 
   findProductById(id: number) {
-    this.homeService.getById(id).subscribe(data => {
+    this.productService.getById(id).subscribe(data => {
       this.product = data;
     })
   }
 
   getProductsMasBuscados() {
-    this.homeService.get().subscribe(data => {
+    this.productService.get().subscribe(data => {
       this.products = data['results'];
     })
   }

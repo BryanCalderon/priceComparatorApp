@@ -3,32 +3,47 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { DetailProductComponent } from './detail-product/detail-product.component';
 import { AuthService } from './services/auth/auth.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { CommonModule } from '@angular/common';
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
+import { AppNavbarComponent } from './components/app-navbar/app-navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ProductComponent } from './components/product/product.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AuthGuardActivateService } from './services/auth/auth-guard-activate.service';
+import { AuthGuardDeactivateService } from './services/auth/auth-guard-deactivate.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    DetailProductComponent
+    ProductComponent,
+    AppNavbarComponent,
+    FooterComponent,
+    RegisterComponent
   ],
   imports: [
     AppRoutingModule,
+    CommonModule,
     BrowserModule,
     FormsModule,
-    SharedModule,
+    ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuardActivateService, AuthGuardDeactivateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

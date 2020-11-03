@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService, Producto } from './service/home.service';
+import { Producto, ProductService } from 'src/app/services/products/products.service';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   search: String;
   products: Producto[];
 
-  constructor(private homeService: HomeService) {
+  constructor(private homeService: ProductService) {
     this.products = []
   }
 

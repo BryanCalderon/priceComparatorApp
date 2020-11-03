@@ -1,0 +1,50 @@
+<div class="container-login">
+    <div>
+        <form [formGroup]="loginForm" class="form-signin">
+            <img class="mb-4" src="../../assets/logo.png" alt="" width="100%" height="100%">
+
+            <ngb-alert class="row" *ngIf="errorMessage" type="danger" (close)="errorMessage = ''">
+                {{ errorMessage }}
+            </ngb-alert>
+
+            <div class="form-group">
+                <label for="title">Nombre Completo*</label>
+                <input type="text" id="username" placeholder="Nombre Completo" class="form-control"
+                    aria-describedby="usernameHelp" formControlName="username" />
+                <small id="usernameHelp"
+                    *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].errors?.required">
+                    El nombre es obligatorio.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" placeholder="Correo electrónico" class="form-control"
+                    formControlName="email" aria-describedby="emailHelp" />
+                <small id="emailHelp" class="form-text text-muted"
+                    *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].errors?.required">
+                    El correo electrónico es obligatorio.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña*</label>
+                <input type="password" placeholder="Contraseña" class="form-control" formControlName="password" />
+                <small *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].errors?.required">
+                    La contraseña es obligatoria.
+                </small>
+            </div>
+
+            <button class="btn btn-success btn-block mt-4" [disabled]="loginForm.invalid" (click)="createUser()">
+                Registrarse 
+            </button>
+
+            <div class="mt-2 text-center">
+                <a [routerLink]="['/login']" routerLinkActive="active">
+                    <small>¿Ya tienes cuenta?</small>
+                </a>
+            </div>
+
+        </form>
+    </div>
+</div>
