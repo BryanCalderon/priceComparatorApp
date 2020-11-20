@@ -8,12 +8,32 @@
             </ngb-alert>
 
             <div class="form-group">
-                <label for="title">Nombre Completo*</label>
-                <input type="text" id="username" placeholder="Nombre Completo" class="form-control"
-                    aria-describedby="usernameHelp" formControlName="username" />
-                <small id="usernameHelp"
-                    *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].errors?.required">
+                <label for="title">Nombre*</label>
+                <input type="text" id="name" placeholder="Nombre Completo" class="form-control"
+                    aria-describedby="nameHelp" formControlName="name" />
+                <small id="nameHelp"
+                    *ngIf="loginForm.controls['name'].touched && loginForm.controls['name'].errors?.required">
                     El nombre es obligatorio.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="title">Apellidos*</label>
+                <input type="text" id="lastName" placeholder="Apellidos" class="form-control"
+                    aria-describedby="lastNameHelp" formControlName="lastName" />
+                <small id="lastName"
+                    *ngIf="loginForm.controls['lastName'].touched && loginForm.controls['lastName'].errors?.required">
+                    El apellido es obligatorio.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="identification">Numero de identificación</label>
+                <input type="text" id="identification" placeholder="Numero de identificación" class="form-control"
+                    formControlName="identification" aria-describedby="identificationHelp" />
+                <small id="identificationHelp" class="form-text text-muted"
+                    *ngIf="loginForm.controls['identification'].touched && loginForm.controls['identification'].errors?.required">
+                    El numero de identificación es obligatorio.
                 </small>
             </div>
 
@@ -30,13 +50,25 @@
             <div class="form-group">
                 <label>Contraseña*</label>
                 <input type="password" placeholder="Contraseña" class="form-control" formControlName="password" />
-                <small *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].errors?.required">
+                <small
+                    *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].errors?.required">
                     La contraseña es obligatoria.
                 </small>
             </div>
 
+            <div class="form-group">
+                <label>Confirmar contraseña*</label>
+                <input type="password" placeholder="Confirmar contraseña" class="form-control"
+                    formControlName="confirmPassword" />
+                <small
+                    *ngIf="loginForm.controls['confirmPassword'].touched && loginForm.controls['confirmPassword'].errors?.required">
+                    La contraseña es obligatoria.
+                </small>
+            </div>
+
+
             <button class="btn btn-success btn-block mt-4" [disabled]="loginForm.invalid" (click)="createUser()">
-                Registrarse 
+                Registrarse
             </button>
 
             <div class="mt-2 text-center">

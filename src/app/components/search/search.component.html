@@ -1,0 +1,54 @@
+<div class="container">
+    <h1 class="my-5">Resultados</h1>
+
+    <div class="row mt-5 justify-content-center" *ngIf="loading">
+        <div class="d-flex">
+            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5 justify-content-center" *ngIf="!loading && productList.length <= 0">
+        <div class="col-8 text-center alert alert-warning">
+            ¡No se encontraron coincidencias!
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-4" *ngIf="!loading && productList.length > 0">
+        <div *ngFor="let product of productList" class="col mb-4">
+            <div class="card h-100">
+                <button (click)="findProduct(product)" class="btn btn-link p-0">
+                    <img [src]="product.image" [alt]="product.name" class="card-img-top">
+                </button>
+                <div class="card-body">
+                    <span style="font-size: small">
+                        {{ product.brand }}
+                    </span>
+
+                    <h5 class="card-title">
+                        {{ product.name }}
+                    </h5>
+
+                    <div style="text-decoration: line-through; font-size: small;">
+                        {{ product.normal_price | number }}
+                    </div>
+
+                    <div style="font-weight: bold;">
+                        {{ product.price | number }}
+                    </div>
+                </div>
+
+                <div class="card-footer bg-transparent">
+                    <small class="text-muted">{{ product.store }}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-5 mx-0 justify-content-center" *ngIf="!loading">
+        <button [routerLink]="['/home']" routerLinkActive="active" class="btn btn-primary">
+            Realizar otra busqueda
+        </button>
+    </div>
+</div>

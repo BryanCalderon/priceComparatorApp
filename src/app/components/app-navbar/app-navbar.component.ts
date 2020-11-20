@@ -13,7 +13,6 @@ export class AppNavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.afAuth.user.subscribe(user => {
-      console.log(user);
       if (user) {
         this.userName = user.displayName;
       }

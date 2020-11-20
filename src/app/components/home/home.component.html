@@ -14,12 +14,23 @@
         </form>
     </div>
 
-    <div class="col card p-5 mb-5">
+    <div class="col row justify-content-center align-content-center" *ngIf="loading">
+        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <div class="col card p-5 mb-5" *ngIf="!loading && products.length > 0">
         <h1 class="card-title">Productos mas buscados</h1>
+        <!-- <div class="row justify-content-center">
+            <div *ngIf="!loading && products.length <= 0" class="col-8 text-center alert alert-warning">
+                Aún no has realizado ninguna busqueda!
+            </div>
+        </div> -->
         <div class="row">
             <div *ngFor="let product of products" class="col-3">
                 <div class="card">
-                    <a [routerLink]="['/product-detail', product.id]" routerLinkActive="active">
+                    <a [routerLink]="['/product', product.id]" routerLinkActive="active">
                         <img [src]="product.image" [alt]="product.name" class="card-img-top">
                     </a>
                     <div class="card-body">
@@ -31,7 +42,7 @@
                         <div style="font-weight: bold;">{{ product.price | number }}</div>
                     </div>
                     <div class="card-footer bg-transparent">
-                        <small class="text-muted">Last updated {{ product.update_date | date }}</small>
+                        <small class="text-muted">Last updated {{ product.updated_date | date }}</small>
                     </div>
                 </div>
             </div>

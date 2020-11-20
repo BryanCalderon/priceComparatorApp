@@ -20,6 +20,7 @@ import { ProductComponent } from './components/product/product.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuardActivateService } from './services/auth/auth-guard-activate.service';
 import { AuthGuardDeactivateService } from './services/auth/auth-guard-deactivate.service';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AuthGuardDeactivateService } from './services/auth/auth-guard-deactivat
     ProductComponent,
     AppNavbarComponent,
     FooterComponent,
-    RegisterComponent
+    RegisterComponent,
+    SearchComponent
   ],
   imports: [
     AppRoutingModule,

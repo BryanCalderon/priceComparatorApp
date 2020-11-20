@@ -6,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { default as firebase } from 'firebase/app';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private afAuth: AngularFireAuth,
     private fb: FormBuilder,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private userService: UserService
   ) { }
 
   loginForm = this.fb.group({
@@ -44,20 +46,12 @@ export class LoginComponent implements OnInit {
     ).subscribe(() => this.errorMessage = '');
   }
 
-  loginWithToken() {
-    this.auth.login(this.loginForm.value.email, this.loginForm.value.password).subscribe(data => {
-      localStorage.setItem('token', data.token);
-      this.router.navigate(['/home']);
-    }, error => {
-      console.log(error);
-      this._success.next(`Usuario o contraseña no valido`);
-    })
-  }
+  login() {
+    this.afAuth.signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password).then(user => {
 
-  /* ***************** FIREBASE ***************** */
-  loginWithEmail() {
-    this.afAuth.signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password).then(() => {
+      this.userService.getByUID(user.user.uid).subscribe(client => this.auth.saveUserIntoLS(client));
       this.router.navigate(['/home']);
+
     }).catch(response => {
       this._success.next(response.message);
     });
@@ -66,5 +60,4 @@ export class LoginComponent implements OnInit {
   async loginWithGoogle() {
     await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
-  /* ***************** FIREBASE ***************** */
 }

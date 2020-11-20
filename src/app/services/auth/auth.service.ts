@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { User } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,17 @@ export class AuthService {
           .set('Content-Type', 'application/x-www-form-urlencoded')
       }
     );
+  }
+
+  saveUserIntoLS(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  deleteUserIntoLS() {
+    localStorage.removeItem('user');
+  }
+
+  getUserIntoLS() {
+    return JSON.parse(localStorage.getItem('user'));
   }
 }
