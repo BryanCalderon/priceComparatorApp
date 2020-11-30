@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { timeout } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Producto, ProductService } from 'src/app/services/products/products.service';
 
@@ -12,14 +13,18 @@ export class HomeComponent implements OnInit {
 
   search: String;
   products: Producto[];
-  loading: boolean = false;
+  loading: boolean = true;
 
   constructor(private productService: ProductService, private router: Router, private auth: AuthService) {
     this.products = []
   }
 
   ngOnInit(): void {
-    this.getProductsMasBuscados();
+    var that = this;
+    setTimeout(function () {
+      that.getProductsMasBuscados();
+    }, 1000);
+
   }
 
   getProductsMasBuscados() {

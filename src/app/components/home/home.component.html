@@ -20,32 +20,25 @@
         </div>
     </div>
 
-    <div class="col card p-5 mb-5" *ngIf="!loading && products.length > 0">
-        <h1 class="card-title">Productos mas buscados</h1>
-        <!-- <div class="row justify-content-center">
-            <div *ngIf="!loading && products.length <= 0" class="col-8 text-center alert alert-warning">
-                Aún no has realizado ninguna busqueda!
-            </div>
-        </div> -->
+    <div class="col p-5 mb-5" *ngIf="!loading && products.length > 0">
+        <h1 class="card-title mb-4 pl-0">Mi historial</h1>
         <div class="row">
-            <div *ngFor="let product of products" class="col-3">
-                <div class="card">
-                    <a [routerLink]="['/product', product.id]" routerLinkActive="active">
-                        <img [src]="product.image" [alt]="product.name" class="card-img-top">
-                    </a>
-                    <div class="card-body">
-                        <span style="font-size: small">{{ product.brand }}</span>
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        <div style="text-decoration: line-through; font-size: small;">
-                            {{ product.normal_price | number }}
+            <carousel [cellsToShow]="4" [height]="500">
+                <div class="carousel-cell" *ngFor="let product of products">
+                    <div class="card h-100">
+                        <a [routerLink]="['/product', product.id]" routerLinkActive="active">
+                            <img [src]="product.image" [alt]="product.name" class="card-img-top">
+                        </a>
+                        <div class="card-body">
+                            <span style="font-size: small">{{ product.brand }}</span>
+                            <h5 class="card-title">{{ product.name }}</h5>
                         </div>
-                        <div style="font-weight: bold;">{{ product.price | number }}</div>
-                    </div>
-                    <div class="card-footer bg-transparent">
-                        <small class="text-muted">Last updated {{ product.updated_date | date }}</small>
+                        <div class="card-footer bg-transparent">
+                            <small class="text-muted">Created {{ product.creation_date | date }}</small>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </carousel>
         </div>
     </div>
 </div>

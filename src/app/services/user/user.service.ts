@@ -5,9 +5,9 @@ import { environment } from 'src/environments/environment';
 
 export interface User {
   name: String,
-  last_name: String,
-  identification: String,
-  email: String,
+  last_name?: String,
+  identification?: String,
+  email?: String,
   uid?: String,
   is_active?: boolean
 }
@@ -26,6 +26,6 @@ export class UserService {
   }
 
   getByUID(uid: String): Observable<any> {
-    return this.http.get(environment.domain + + this.endpoint + `by_uid/${uid}/`);
+    return this.http.get(environment.domain + this.endpoint + `by_uid/${uid}/`);
   }
 }

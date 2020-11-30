@@ -18,6 +18,7 @@ export interface Producto {
   updated_date: any
   store: String
   user: any
+  creation_date?: any
 };
 
 @Injectable({
@@ -44,8 +45,8 @@ export class ProductService {
     return this.http.get<any>(environment.domain + this.endpoint + `search/${filter}/`);
   }
 
-  searchAndSaveProducts(idParent: number, filter: String): Observable<any> {
-    return this.http.get<any>(environment.domain + this.endpoint + `${idParent}/search_and_save/${filter}/`);
+  getRelated(idParent: number): Observable<any> {
+    return this.http.get<any>(environment.domain + this.endpoint + `${idParent}/find_related/`);
   }
 
   persist(product: Producto): Observable<any> {

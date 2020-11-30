@@ -21,6 +21,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthGuardActivateService } from './services/auth/auth-guard-activate.service';
 import { AuthGuardDeactivateService } from './services/auth/auth-guard-deactivate.service';
 import { SearchComponent } from './components/search/search.component';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SearchComponent } from './components/search/search.component';
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    IvyCarouselModule
   ],
   providers: [AuthService, AuthGuardActivateService, AuthGuardDeactivateService],
   bootstrap: [AppComponent]

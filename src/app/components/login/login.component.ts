@@ -6,7 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { default as firebase } from 'firebase/app';
-import { UserService } from 'src/app/services/user/user.service';
+import { User, UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +23,8 @@ export class LoginComponent implements OnInit {
     private afAuth: AngularFireAuth,
     private fb: FormBuilder,
     private ngZone: NgZone,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService
   ) { }
 
   loginForm = this.fb.group({
@@ -48,16 +49,31 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.afAuth.signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password).then(user => {
-
       this.userService.getByUID(user.user.uid).subscribe(client => this.auth.saveUserIntoLS(client));
       this.router.navigate(['/home']);
-
     }).catch(response => {
       this._success.next(response.message);
     });
   }
 
   async loginWithGoogle() {
-    await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(response => {
+      this.userService.getByUID(response.user.uid).subscribe(client => {
+        console.log("CLIENT >> ", client);
+        this.auth.saveUserIntoLS(client);
+        this.router.navigate(['/home']);
+      }, error => {
+        let user: User = {
+          name: response.user.displayName,
+          email: response.user.email,
+          uid: response.user.uid
+        };
+
+        this.userService.create(user).subscribe(user => {
+          this.authService.saveUserIntoLS(user);
+          this.router.navigate(['/home']);
+        });
+      });
+    });
   }
 }
