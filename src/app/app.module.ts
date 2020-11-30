@@ -22,6 +22,7 @@ import { AuthGuardActivateService } from './services/auth/auth-guard-activate.se
 import { AuthGuardDeactivateService } from './services/auth/auth-guard-deactivate.service';
 import { SearchComponent } from './components/search/search.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    IvyCarouselModule
+    IvyCarouselModule,
+    ChartsModule
   ],
   providers: [AuthService, AuthGuardActivateService, AuthGuardDeactivateService],
   bootstrap: [AppComponent]

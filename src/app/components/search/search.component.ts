@@ -39,8 +39,6 @@ export class SearchComponent implements OnInit {
   findProduct(product: Producto) {
     product.user = this.auth.getUserIntoLS().id;
     this.productService.persist(product).subscribe(item => {
-      console.log("ITEM >> ", item);
-
       this.router.navigate(['product', item.id]);
     });
   }

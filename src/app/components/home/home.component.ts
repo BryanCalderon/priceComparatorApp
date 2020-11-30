@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { timeout } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Producto, ProductService } from 'src/app/services/products/products.service';
 

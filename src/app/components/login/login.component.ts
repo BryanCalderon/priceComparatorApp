@@ -59,7 +59,6 @@ export class LoginComponent implements OnInit {
   async loginWithGoogle() {
     await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(response => {
       this.userService.getByUID(response.user.uid).subscribe(client => {
-        console.log("CLIENT >> ", client);
         this.auth.saveUserIntoLS(client);
         this.router.navigate(['/home']);
       }, error => {
